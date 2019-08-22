@@ -34,18 +34,27 @@ bool processInput(bool continueApplication = true);
 GLint vertexShaderID, fragmentShaderID, shaderProgramID;
 GLuint VAO, VBO;
 
+typedef struct _Vertex {//se agrego esta estructura
+	float m_Pos[3];
+	float m_Color[3];
+} Vertex;
+
 // Codigo de los shaders, por ahora se crean en una cadena de texto
 // Shader de vertices
 const GLchar * vertexShaderSource = "#version 330 core\n"
-		"layout (location=0) in vec3 in_position;\n"
+		"layout (location=0) in vec3 in_position;\n"//atributo que tendra nuestro shader
+		"layout (location=1) in vec3 in_color;\n"//se agrego un nuevo atributo
+		"out vec3 our_color;\n"
 		"void main(){\n"
-		"gl_Position = vec4(in_position, 1.0);\n"
+		"gl_Position = vec4(in_position, 1.0);\n"//tipo de dato que espera
+		"our_color = in_color;\n"//se agrega una nueva instruccion
 		"}\0";
 // Shader de fragmento
 const GLchar * fragmentShaderSource = "#version 330 core\n"
 		"out vec4 color;\n"
+		"in vec3 our_color;\n"//se agrego nuevo atributo
 		"void main(){\n"
-		"color = vec4(0.9, 0.4, 0.1, 1.0);\n"
+		"color = vec4(our_color,1.0);\n"//se elimino esta sentencia: vec4(0.9, 0.4, 0.1, 1.0)
 		"}\0";
 
 // Implementacion de todas las funciones.
@@ -115,12 +124,27 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		glGetShaderInfoLog(vertexShaderID, 512, NULL, infoLog);
 		std::cout << "Error al compilar el VERTEX_SHADER." << infoLog << std::endl;
 	}
+	//se agrego el siguiente fragmento de codigo, del manual de practicas--------------------------------------------------
+	// Se crea el id del Fragment Shader
+	fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+	// Se agrega el codigo fuente al ID
+	glShaderSource(fragmentShaderID, 1, &fragmentShaderSource, NULL);
+	// Compilacion de Fragment Shader
+	glCompileShader(fragmentShaderID);
+	// Se obtiene el estatus de la compilacion del Fragment shader
+	glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &success);
+	if (!success) {
+		//en el caso de error se obtiene el error y lanza mensaje con error
+		glGetShaderInfoLog(fragmentShaderID, 512, NULL, infoLog);
+		std::cout << "Error al compilar el Fragment shader. " << infoLog << std::endl;
+	}
+	//----------------------------------------------------------------------------------
 
 	// Programa con los shaders
 	shaderProgramID = glCreateProgram();
 	// Se agregan el vertex y fragment shader al program
 	glAttachShader(shaderProgramID, vertexShaderID);
-	// glAttachShader(shaderProgramID, fragmentShaderID);
+	glAttachShader(shaderProgramID, fragmentShaderID); //se descomenta esta linea, puesto que ya compilamos el fragment shader
 	// Proceso de linkeo
 	glLinkProgram(shaderProgramID);
 	// Revision de error de linkeo del programa
@@ -131,7 +155,49 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	}
 
 	// Se definen los vertices de la geometria a dibujar
-	GLfloat vertices[] = {-0.5, -0.5, 0.0, 0.5, -0.5, 0.0, 0.0, 0.5, 0.0};
+	//GLfloat vertices[] = {-0.5, -0.5, 0.0, 0.5, -0.5, 0.0, 0.0, 0.5, 0.0}; se comenta esta linea puesto que vamos renombrar el arreglo de los vertices
+	/*Vertex vertices[] = {
+		{ { -0.5f,-0.5f, 0.0f },{ 1.0f, 0.0f, 0.0f } },
+		{ {  0.5f,-0.5f, 0.0f },{ 0.0f, 1.0f, 0.0f } },
+		{ {  0.5f, 0.5f, 0.0f },{ 0.0f, 0.0f, 1.0f } },
+		{ { -0.5f,-0.5f, 0.0f },{ 1.0f, 0.0f, 0.0f } },
+		{ {  0.5f, 0.5f, 0.0f },{ 0.0f, 0.0f, 1.0f } },
+		{ { -0.5f, 0.5f, 0.0f },{ 1.0f, 0.0f, 1.0f } }
+	};*/
+	//se definen los vertices para dibujar la estrella
+	Vertex vertices[] = {
+		{ { 0.0f, 0.0f, 0.0f },{ 0.2f, 0.3f, 0.5f } },
+		{ { 0.2f, 0.7f, 0.0f },{ 0.5f, 0.3f, 0.7f } },
+		{ { 0.0f, 0.7f, 0.0f },{ 0.2f, 0.4f, 0.1f } },//primer triangulo de la estrella
+
+		{ { 0.0f, 0.7f, 0.0f },{ 0.2f, 0.6f, 0.45f } },
+		{ { 0.2f, 0.7f, 0.0f },{ 0.5f, 0.3f, 0.7f } },
+		{ { 0.0f, 0.85f, 0.0f },{ 0.4f, 0.1f, 0.0f } },//segundo triangulo de la estrella
+
+		{ { 0.0f, 0.0f, 0.0f },{ 0.2f, 0.3f, 0.5f } },
+		{ { 0.0f, 0.7f, 0.0f },{ 0.2f, 0.4f, 0.1f } },
+		{ { -0.2f, 0.7f, 0.0f },{ 0.5f, 0.3f, 0.7f } },//tercer triangulo de la estrella
+
+		{ { 0.0f, 0.7f, 0.0f },{ 0.2f, 0.6f, 0.45f } },
+		{ { 0.0f, 0.85f, 0.0f },{ 0.4f, 0.1f, 0.0f } },
+		{ { -0.2f, 0.7f, 0.0f },{ 0.5f, 0.3f, 0.7f } },//cuarto triangulo de la estrella
+
+		{ { 0.0f, 0.0f, 0.0f },{ 0.2f, 0.3f, 0.5f } },
+		{ { -0.2f, -0.7f, 0.0f },{ 0.5f, 0.3f, 0.7f } },
+		{ { 0.0f, -0.7f, 0.0f },{ 0.2f, 0.4f, 0.1f } },//quinto traingulo de la estrella
+
+		{ { 0.0f, 0.0f, 0.0f },{ 0.2f, 0.3f, 0.5f } },
+		{ { 0.0f, -0.7f, 0.0f },{ 0.2f, 0.4f, 0.1f } },
+		{ { 0.2f, -0.7f, 0.0f },{ 0.5f, 0.3f, 0.7f } }//sexto triangulo
+	};
+	//se agregaron estas lineas
+	size_t bufferSize = sizeof(vertices);
+	size_t vertexSize = sizeof(vertices[0]);
+	size_t rgbOffset = sizeof(vertices[0].m_Pos);
+	std::cout << "Vertices:" << std::endl;
+	std::cout << "bufferSize:" << bufferSize << std::endl;
+	std::cout << "vertexSize:" << vertexSize << std::endl;
+	std::cout << "rgbOffset:" << rgbOffset << std::endl;
 
 	// Se crea el ID del VAO
 	/*
@@ -143,7 +209,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	// Cambiamos el estado para indicar que usaremos el id del VAO
 	glBindVertexArray(VAO);
 	// Se crea el VBO (buffer de datos) asociado al VAO
-	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &VBO);//almacena el arreglo de vertices de la geometria
 
 	// Cambiamos el estado para indicar que usaremos el id del VBO como Arreglo de vertices (GL_ARRAY_BUFFER)
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -153,9 +219,12 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	// Se crea un indice para el atributo del vertice posicion, debe corresponder al location del atributo del shader
 	// indice del atributo, Cantidad de datos, Tipo de dato, Normalizacion, Tamanio del bloque (Stride), offset
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GL_FLOAT), (GLvoid*)0);
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GL_FLOAT), (GLvoid*)0);//se modifica esta linea
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, vertexSize, (GLvoid*)0);//vertexsize = 6 * sizeof(float) = 24 bytes
 	// Se habilita el atributo del vertice con indice 0 (posicion)
 	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, vertexSize, (GLvoid*)rgbOffset);//se agrego esta linea
+	glEnableVertexAttribArray(1);//se habilita la presencia de color, posicion 1
 
 	// Ya que se configuro, se regresa al estado original
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -243,12 +312,15 @@ void applicationLoop() {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// Esta linea esta comentada debido a que de momento no se usan los shaders
-		// glUseProgram(shaderProgramID);
+		glUseProgram(shaderProgramID);// se descomenta esta linea para habilitar los shaders
 
 		// Se indica el buffer de datos y la estructura de estos utilizando solo el id del VAO
 		glBindVertexArray(VAO);
 		// Primitiva de ensamble
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		//glDrawArrays(GL_TRIANGLES, 0, 3);//que geometria deseamos dibujar, en donde empezara y la cantidad de vertices
+		//glDrawArrays(GL_TRIANGLES, 0, 6);//se modifico la linea anterior
+		//glDrawArrays(GL_TRIANGLES, 3, 6);//se modifico la linea anterior
+		glDrawArrays(GL_TRIANGLES, 0, 18);//se modifico la linea anterior para poder dibujar la estrella
 		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);
