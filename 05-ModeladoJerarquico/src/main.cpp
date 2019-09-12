@@ -43,7 +43,8 @@ bool exitApp = false;
 int lastMousePosX, offsetX = 0;
 int lastMousePosY, offsetY = 0;
 
-float rot1 = 0.0, rot2 = 0.0;
+float rot1 = 0.0, rot2 = 0.0, rot3 = 0.0, rot4 = 0.0;//se agregaron rot3 y rot4
+bool sentido = true;//se agrego esta bandera para el proceso de invertir el sentido de la rotacion
 
 double deltaTime;
 
@@ -210,10 +211,21 @@ bool processInput(bool continueApplication){
 	offsetX = 0;
 	offsetY = 0;
 
-	if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)//condicion para cachar el evento de shift + 1
+		sentido = false;
+	
+	if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS && sentido)//if - else para modificar el sentido de la rotacion
 		rot1 += 0.001;
-	if(glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+	else if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS && !sentido)
+		rot1 -= 0.001;
+	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
 		rot2 += 0.001;
+	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)//se agregaron las condiciones para modificar el valor de rot3 y rot4, cuando se presiona alguna tecla
+		rot3 += 0.001;
+	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
+		rot4 += 0.001;
+
+	sentido = true;//reiniciamos la bandera
 
 	glfwPollEvents();
 	return continueApplication;
@@ -240,6 +252,8 @@ void applicationLoop() {
 		glm::mat4 j1 = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f));
 		sphere1.enableWireMode();
 		sphere1.render(glm::scale(j1, glm::vec3(0.1, 0.1, 0.1)));
+		j1 = glm::rotate(j1, rot1, glm::vec3(0.0f, 0.0f, 1.0f));//se agregaron estas lineas para el modelado jerarquico
+		j1 = glm::rotate(j1, rot2, glm::vec3(0.0f, 1.0f, 0.0f));
 
 		// Hueso 1
 		glm::mat4 l1 = glm::translate(j1, glm::vec3(0.25f, 0.0, 0.0));
@@ -249,6 +263,8 @@ void applicationLoop() {
 
 		// Articulacion 2
 		glm::mat4 j2 = glm::translate(j1, glm::vec3(0.5, 0.0f, 0.0f));
+		j2 = glm::rotate(j2, rot3, glm::vec3(0.0, 0.0, 1.0));
+		j2 = glm::rotate(j2, rot4, glm::vec3(0.0, 1.0, 0.0));
 		sphere1.enableWireMode();
 		sphere1.render(glm::scale(j2, glm::vec3(0.1, 0.1, 0.1)));
 

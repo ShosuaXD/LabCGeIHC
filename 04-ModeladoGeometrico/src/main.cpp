@@ -41,6 +41,7 @@ Sphere ojos(20, 20);
 Cylinder cylinder1(20, 20, 0.5, 0.5);
 Cylinder cylinder2(20, 20, 0.5, 0.5);
 Cylinder cylinder3(20, 20, 0.5, 0.5);
+Cylinder manoPunio(20, 20, 0.5, 0.5);//se agrego esta primitiva para complementar el modelo, practica 5
 Box box1;
 Box pantalones;
 
@@ -50,6 +51,10 @@ int lastMousePosY, offsetY;
 //tambien puede ser
 //int offsetX = 0;
 //int offsetY = 0;
+
+float rotacionHombroDerecho = 0.0f, rotacionHombroIzquierdo = 0.0f, rotacionCodoDerecho = 0.0f, rotacionCodoIzquierdo = 0.0f;//estas variables se agregaron para la actividad de la practica 5
+float rotacionMuniecaDerecha = 0.0f;
+float rot0 = 0.0f, dz = 0.0f;//se agrego esta variable para la practica 5
 
 double deltaTime;
 
@@ -151,6 +156,11 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	cylinder2.setShader(&shader);
 	cylinder2.setColor(glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
 
+	//mano puño-practica 5
+	manoPunio.init();
+	manoPunio.setShader(&shader);
+	manoPunio.setColor(glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
+
 	//zapatos
 	cylinder3.init();
 	cylinder3.setShader(&shader);
@@ -184,6 +194,7 @@ void destroy() {
 	sphere3.destroy();
 	ojos.destroy();
 	pantalones.destroy();
+	manoPunio.destroy();//destruir objeto-pratica 5
 
 	shader.destroy();
 }
@@ -253,12 +264,47 @@ bool processInput(bool continueApplication){
 	offsetX = 0;
 	offsetY = 0;
 
+	//se agregaron esta lineas para la actividad de la pratica 5
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+		rot0 = 0.0001f;
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+		rot0 = -0.0001f;
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+		dz = 0.0001f;
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		dz = -0.0001f;
+
+	//condicion para modificar el valor de la rotacion del hombro derecho
+	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
+		rotacionHombroDerecho += 0.01f;
+	else if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+		rotacionHombroDerecho -= 0.01f;
+
+	//condicion para modificar el valor de la rotacion del hombro izquierdo
+	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
+		rotacionHombroIzquierdo += 0.01f;
+	else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+		rotacionHombroIzquierdo -= 0.01f;
+
+	//condicion para modificar el valor de la rotacion del codo derecho
+	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
+		rotacionCodoDerecho += 0.01f;
+	else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+		rotacionCodoDerecho -= 0.01f;
+
+	//condicion para modificar el valor de la rotacion del codo derecho
+	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
+		rotacionCodoIzquierdo += 0.01f;
+	else if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+		rotacionCodoIzquierdo -= 0.01f;
+
 	glfwPollEvents();
 	return continueApplication;
 }
 
 void applicationLoop() {
 	bool psi = true;
+	glm::mat4 model = glm::mat4(1.0f);//esta linea se mueve para la actividad de la practica 5
 	while (psi) {
 		psi = processInput(true);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -272,7 +318,7 @@ void applicationLoop() {
 		shader.setMatrix4("projection", 1, false, glm::value_ptr(projection));
 		shader.setMatrix4("view", 1, false, glm::value_ptr(view));
 
-		glm::mat4 model = glm::mat4(1.0f);
+		//glm::mat4 model = glm::mat4(1.0f);//esta linea se movio para la actividad 5
 
 		//vizualizar con lineas la geometria
 		//sphere1.enableWireMode();//se descomentan y se intercambia de lugar,//comentando esta linea para descubrir que realiza esa funcion
@@ -281,6 +327,10 @@ void applicationLoop() {
 
 		//cylinder1.render(model);
 		//cylinder1.enableWireMode();
+
+		//se aplican transformaciones a model
+		model = glm::translate(model, glm::vec3(0, 0, dz));
+		model = glm::rotate(model, rot0, glm::vec3(0.0, 1.0, 0.0));
 
 		box1.enableWireMode();
 		box1.render(glm::scale(model, glm::vec3(1.0, 1.0, 0.1)));
@@ -293,6 +343,7 @@ void applicationLoop() {
 		glm::mat4 j1 = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f));//se agrego esta linea para empezar a modelar a la esponja
 		sphere1.enableWireMode();
 		sphere1.render(glm::scale(j1, glm::vec3(0.1,0.1,0.1)));
+		j1 = glm::rotate(j1, rotacionHombroDerecho, glm::vec3(0, 0, 1));//agregamos la rotacion segun sea el valor de rotacionHombroDerecho
 
 		//hueso 1 (Brazo derecho)
 		glm::mat4 l1 = glm::translate(j1, glm::vec3(0.25f, 0.0f, 0.0f));
@@ -304,6 +355,7 @@ void applicationLoop() {
 		glm::mat4 j2 = glm::translate(j1, glm::vec3(0.5f, 0.0f, 0.0f));
 		sphere1.enableWireMode();
 		sphere1.render(glm::scale(j2, glm::vec3(0.1, 0.1, 0.1)));
+		j2 = glm::rotate(j2, rotacionCodoDerecho, glm::vec3(0, 0, 1));//se agrego esta linea para la rotacion del codo derecho
 
 		//hueso 2(antebrazo derecho)
 		glm::mat4 l2 = glm::translate(j2, glm::vec3(0.25, 0.0, 0.0));
@@ -311,10 +363,29 @@ void applicationLoop() {
 		cylinder1.enableWireMode();
 		cylinder1.render(glm::scale(l2, glm::vec3(0.1, 0.5, 0.1)));
 
+		//Muñeca derecha
+		glm::mat4 j5 = glm::translate(j2, glm::vec3(0.5f, 0.0f, 0.0f));
+		sphere1.enableWireMode();
+		sphere1.render(glm::scale(j5, glm::vec3(0.1, 0.1, 0.1)));
+		//j5 = glm::rotate(j5, rotacionCodoDerecho, glm::vec3(0, 0, 1));
+
+		//puño del dolor :V derecho
+		glm::mat4 manoDerecha = glm::translate(j5, glm::vec3(0.06f, 0.0f, 0.0f));
+		//manoDerecha = glm::rotate(manoDerecha, glm::radians(90.0f), glm::vec3(0, 0, 1.0));
+		manoPunio.enableWireMode();
+		manoPunio.render(glm::scale(manoDerecha, glm::vec3(0.1, 0.1, 0.1)));
+
+		//pulgar del dolor BV derecho
+		glm::mat4 pulgarDerecho = glm::translate(manoDerecha, glm::vec3(0.0f, 0.08f, 0.0f));
+		//manoDerecha = glm::rotate(manoDerecha, glm::radians(90.0f), glm::vec3(0, 0, 1.0));
+		box1.enableWireMode();
+		box1.render(glm::scale(pulgarDerecho, glm::vec3(0.03, 0.03, 0.03)));
+
 		//Articulacion 3 (Hombro izquierdo)
 		glm::mat4 j3 = glm::translate(model, glm::vec3(-0.5f, 0.0f, 0.0f));//se agrego esta linea para empezar a modelar a la esponja
 		sphere1.enableWireMode();
 		sphere1.render(glm::scale(j3, glm::vec3(0.1, 0.1, 0.1)));
+		j3 = glm::rotate(j3, rotacionHombroIzquierdo, glm::vec3(0, 0, 1));//agregamos la rotacion segun sea el valor de rotacionHombroIzquierdo
 
 		//Hueso 3 (Brazo izquierdo)
 		glm::mat4 l3 = glm::translate(j3, glm::vec3(-0.25f, 0.0f, 0.0f));
@@ -326,6 +397,7 @@ void applicationLoop() {
 		glm::mat4 j4 = glm::translate(j3, glm::vec3(-0.5f, 0.0f, 0.0f));
 		sphere1.enableWireMode();
 		sphere1.render(glm::scale(j4, glm::vec3(0.1, 0.1, 0.1)));
+		j4 = glm::rotate(j4, rotacionCodoIzquierdo, glm::vec3(0, 0, 1));//se agrego esta linea para la rotacion del codo izquierdo
 
 		//Hueso 4 (Antebrazo izquierdo)
 		glm::mat4 l4 = glm::translate(j4, glm::vec3(-0.25, 0.0, 0.0));
@@ -427,6 +499,10 @@ void applicationLoop() {
 		sphere3.render(glm::scale(nPunta, glm::vec3(0.1f, 0.1f, 0.1f)));
 
 		shader.turnOff();
+
+		//se reinician las variables
+		dz = 0.0f;
+		rot0 = 0.0f;
 
 		glfwSwapBuffers(window);
 	}
