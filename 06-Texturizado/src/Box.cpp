@@ -2,30 +2,30 @@
 
 Box::Box()
 {
-	vertexArray.push_back(Vertex(glm::vec3(0.5, 0.5, 0.5), glm::vec2(), glm::vec3(0.0, 0.0, 1.0)));
-	vertexArray.push_back(Vertex(glm::vec3(-0.5, 0.5, 0.5), glm::vec2(), glm::vec3(0.0, 0.0, 1.0)));
-	vertexArray.push_back(Vertex(glm::vec3(-0.5, -0.5, 0.5), glm::vec2(), glm::vec3(0.0, 0.0, 1.0)));
-	vertexArray.push_back(Vertex(glm::vec3(0.5, -0.5, 0.5), glm::vec2(), glm::vec3(0.0, 0.0, 1.0)));
+	vertexArray.push_back(Vertex(glm::vec3(0.5, 0.5, 0.5), glm::vec2(1,1), glm::vec3(0.0, 0.0, 1.0)));
+	vertexArray.push_back(Vertex(glm::vec3(-0.5, 0.5, 0.5), glm::vec2(0,1), glm::vec3(0.0, 0.0, 1.0)));
+	vertexArray.push_back(Vertex(glm::vec3(-0.5, -0.5, 0.5), glm::vec2(0,0), glm::vec3(0.0, 0.0, 1.0)));
+	vertexArray.push_back(Vertex(glm::vec3(0.5, -0.5, 0.5), glm::vec2(1,0), glm::vec3(0.0, 0.0, 1.0)));
 
-	vertexArray.push_back(Vertex(glm::vec3(0.5, 0.5, 0.5), glm::vec2(), glm::vec3(1.0, 0.0, 0.0)));
-	vertexArray.push_back(Vertex(glm::vec3(0.5, -0.5, 0.5), glm::vec2(), glm::vec3(1.0, 0.0, 0.0)));
-	vertexArray.push_back(Vertex(glm::vec3(0.5, -0.5, -0.5), glm::vec2(), glm::vec3(1.0, 0.0, 0.0)));
-	vertexArray.push_back(Vertex(glm::vec3(0.5, 0.5, -0.5), glm::vec2(), glm::vec3(1.0, 0.0, 0.0)));
+	vertexArray.push_back(Vertex(glm::vec3(0.5, 0.5, 0.5), glm::vec2(0,1), glm::vec3(1.0, 0.0, 0.0)));
+	vertexArray.push_back(Vertex(glm::vec3(0.5, -0.5, 0.5), glm::vec2(0,0), glm::vec3(1.0, 0.0, 0.0)));
+	vertexArray.push_back(Vertex(glm::vec3(0.5, -0.5, -0.5), glm::vec2(1,0), glm::vec3(1.0, 0.0, 0.0)));
+	vertexArray.push_back(Vertex(glm::vec3(0.5, 0.5, -0.5), glm::vec2(1,1), glm::vec3(1.0, 0.0, 0.0)));
 
-	vertexArray.push_back(Vertex(glm::vec3(0.5, 0.5, -0.5), glm::vec2(), glm::vec3(0.0, 0.0, -1.0)));
-	vertexArray.push_back(Vertex(glm::vec3(0.5, -0.5, -0.5), glm::vec2(), glm::vec3(0.0, 0.0, -1.0)));
-	vertexArray.push_back(Vertex(glm::vec3(-0.5, -0.5, -0.5), glm::vec2(), glm::vec3(0.0, 0.0, -1.0)));
-	vertexArray.push_back(Vertex(glm::vec3(-0.5, 0.5, -0.5), glm::vec2(), glm::vec3(0.0, 0.0, -1.0)));
+	vertexArray.push_back(Vertex(glm::vec3(0.5, 0.5, -0.5), glm::vec2(0,1), glm::vec3(0.0, 0.0, -1.0)));
+	vertexArray.push_back(Vertex(glm::vec3(0.5, -0.5, -0.5), glm::vec2(0,0), glm::vec3(0.0, 0.0, -1.0)));
+	vertexArray.push_back(Vertex(glm::vec3(-0.5, -0.5, -0.5), glm::vec2(1,0), glm::vec3(0.0, 0.0, -1.0)));
+	vertexArray.push_back(Vertex(glm::vec3(-0.5, 0.5, -0.5), glm::vec2(1,1), glm::vec3(0.0, 0.0, -1.0)));
 
 	vertexArray.push_back(Vertex(glm::vec3(-0.5, 0.5, 0.5), glm::vec2(), glm::vec3(-1.0, 0.0, 0.0)));
 	vertexArray.push_back(Vertex(glm::vec3(-0.5, 0.5, -0.5), glm::vec2(), glm::vec3(-1.0, 0.0, 0.0)));
 	vertexArray.push_back(Vertex(glm::vec3(-0.5, -0.5, -0.5), glm::vec2(), glm::vec3(-1.0, 0.0, 0.0)));
 	vertexArray.push_back(Vertex(glm::vec3(-0.5, -0.5, 0.5), glm::vec2(), glm::vec3(-1.0, 0.0, 0.0)));
 
-	vertexArray.push_back(Vertex(glm::vec3(0.5, 0.5, 0.5), glm::vec2(), glm::vec3(0.0, 1.0, 0.0)));
-	vertexArray.push_back(Vertex(glm::vec3(0.5, 0.5, -0.5), glm::vec2(), glm::vec3(0.0, 1.0, 0.0)));
-	vertexArray.push_back(Vertex(glm::vec3(-0.5, 0.5, -0.5), glm::vec2(), glm::vec3(0.0, 1.0, 0.0)));
-	vertexArray.push_back(Vertex(glm::vec3(-0.5, 0.5, 0.5), glm::vec2(), glm::vec3(0.0, 1.0, 0.0)));
+	vertexArray.push_back(Vertex(glm::vec3(0.5, 0.5, 0.5), glm::vec2(1,0), glm::vec3(0.0, 1.0, 0.0)));
+	vertexArray.push_back(Vertex(glm::vec3(0.5, 0.5, -0.5), glm::vec2(1,1), glm::vec3(0.0, 1.0, 0.0)));
+	vertexArray.push_back(Vertex(glm::vec3(-0.5, 0.5, -0.5), glm::vec2(0,1), glm::vec3(0.0, 1.0, 0.0)));
+	vertexArray.push_back(Vertex(glm::vec3(-0.5, 0.5, 0.5), glm::vec2(0,0), glm::vec3(0.0, 1.0, 0.0)));
 
 	vertexArray.push_back(Vertex(glm::vec3(0.5, -0.5, 0.5), glm::vec2(), glm::vec3(0.0, -1.0, 0.0)));
 	vertexArray.push_back(Vertex(glm::vec3(-0.5, -0.5, 0.5), glm::vec2(), glm::vec3(0.0, -1.0, 0.0)));
