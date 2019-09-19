@@ -45,6 +45,8 @@ bool processInput(bool continueApplication = true);
 GLuint VAO, VBO, EBO;//se agrego el EBO
 GLuint VAO2, VBO2, EBO2;//se duplico la linea anterior
 
+float movX = 0.0f;
+
 typedef struct _Vertex{
 	glm::vec3 m_Pos;
 	glm::vec3 m_Color;
@@ -123,12 +125,32 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		{ glm::vec3(-0.5f, -0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },//V0  {
 		{ glm::vec3(0.5f, -0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },//V1   {
 		{ glm::vec3(0.5f, 0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },//V2    {cara frontal
-		{ glm::vec3(-0.5f, 0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },//V4   {
+		{ glm::vec3(-0.5f, 0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },//V3   {
 		//cara derecha
-		{ glm::vec3(0.5f, -0.5f,  0.5f), glm::vec3(0.0f, 1.0f, 0.0f) },
-		{ glm::vec3(0.5f, -0.5f,  -0.5f), glm::vec3(0.0f, 1.0f, 0.0f) },
-		{ glm::vec3(0.5f, 0.5f,  -0.5f), glm::vec3(0.0f, 1.0f, 0.0f) },
-		{ glm::vec3(0.5f, 0.5f,  0.5f), glm::vec3(0.0f, 1.0f, 0.0f) },
+		{ glm::vec3(0.5f, -0.5f,  0.5f), glm::vec3(0.0f, 1.0f, 0.0f) }, //V4
+		{ glm::vec3(0.5f, -0.5f,  -0.5f), glm::vec3(0.0f, 1.0f, 0.0f) },//V5
+		{ glm::vec3(0.5f, 0.5f,  -0.5f), glm::vec3(0.0f, 1.0f, 0.0f) }, //V6
+		{ glm::vec3(0.5f, 0.5f,  0.5f), glm::vec3(0.0f, 1.0f, 0.0f) },  //V7
+		//cara izquierda
+		{ glm::vec3(-0.5f, 0.5f,  0.5f), glm::vec3(0.0f, 0.0f, 1.0f) },  //V8
+		{ glm::vec3(-0.5f, 0.5f,  -0.5f), glm::vec3(0.0f, 0.0f, 1.0f) }, //V9
+		{ glm::vec3(-0.5f, -0.5f,  -0.5f), glm::vec3(0.0f, 0.0f, 1.0f) },//V10
+		{ glm::vec3(-0.5f, -0.5f,  0.5f), glm::vec3(0.0f, 0.0f, 1.0f) }, //V11
+		//cara trasera
+		{ glm::vec3(-0.5f, -0.5f,  -0.5f), glm::vec3(1.0f, 0.0f, 1.0f) },//V12
+		{ glm::vec3(-0.5f, 0.5f,  -0.5f), glm::vec3(1.0f, 0.0f, 1.0f) }, //V13
+		{ glm::vec3(0.5f, 0.5f,  -0.5f), glm::vec3(1.0f, 0.0f, 1.0f) },  //V14
+		{ glm::vec3(0.5f, -0.5f,  -0.5f), glm::vec3(1.0f, 0.0f, 1.0f) },  //V15
+		//Cara top
+		{ glm::vec3(-0.5f, 0.5f,  -0.5f), glm::vec3(0.0f, 1.0f, 1.0f) },//V16
+		{ glm::vec3(-0.5f, 0.5f,  0.5f), glm::vec3(0.0f, 1.0f, 1.0f) }, //V17
+		{ glm::vec3(0.5f, 0.5f,  0.5f), glm::vec3(0.0f, 1.0f, 1.0f) },  //V18
+		{ glm::vec3(0.5f, 0.5f,  -0.5f), glm::vec3(0.0f, 1.0f, 1.0f) }, //V19
+		//cara bottom
+		{ glm::vec3(-0.5f, -0.5f,  -0.5f), glm::vec3(1.0f, 1.0f, 0.0f) },//V20
+		{ glm::vec3(0.5f, -0.5f,  -0.5f), glm::vec3(1.0f, 1.0f, 0.0f) }, //V21
+		{ glm::vec3(0.5f, -0.5f,  0.5f), glm::vec3(1.0f, 1.0f, 0.0f) },  //V22
+		{ glm::vec3(-0.5f, -0.5f,  0.5f), glm::vec3(1.0f, 1.0f, 0.0f) }  //V23
 	};
 
 	// Se definen los indices de las conexiones con los vertices.
@@ -151,7 +173,15 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		0,1,2,
 		0,2,3,
 		4,5,6,
-		4,6,7
+		4,6,7,
+		8,9,10,
+		8,10,11,
+		12,13,14,
+		12,14,15,
+		16,17,18,
+		16,18,19,
+		20,21,22,
+		20,22,23
 	};
 
 	size_t bufferSize = sizeof(vertices);
@@ -274,6 +304,12 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 		case GLFW_KEY_ESCAPE:
 			exitApp = true;
 			break;
+		case GLFW_KEY_A:
+			movX -= 1.0;
+			break;
+		case GLFW_KEY_D:
+			movX += 1.0;
+			break;
 		}
 	}
 }
@@ -325,13 +361,13 @@ void applicationLoop() {
 		shader->turnOn();//se agrego esta linea para activar el shader, por medio de la clase
 
 		glm::mat4 view = glm::mat4(1.0f);//se crea la matriz de vista
-		view = glm::translate(view, glm::vec3(0.0, 0.0, -3.0));//se debe realializar una traslacion para observar la geometria
+		view = glm::translate(view, glm::vec3(movX, 0.0, -3.0));//se debe realializar una traslacion para observar la geometria
 		shader->setMatrix4("projection", 1, false, glm::value_ptr(projection));//se enlaza las matrices creadas con el vertex shader
 		shader->setMatrix4("view", 1, false, glm::value_ptr(view));//se enlaza las matrices creadas con el vertex shader
 
 		glm::mat4 model = glm::mat4(1.0f);//se crea la matriz del modelo
 		//model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(0.0, 1.0, 0.0));//haciendo una rotacion al cubo sobre el eje y, para observar la cara derecha del cubo
-		model = glm::translate(model, glm::vec3(-1.0, 1.0, -4.0));//se elimina la linea de arriba para poder dibujar la letra C, primer cubo
+		model = glm::translate(model, glm::vec3(-3.5, 1.0, -4.0));//se elimina la linea de arriba para poder dibujar la letra C, primer cubo
 		shader->setMatrix4("model", 1, false, glm::value_ptr(model));//se enlaza las matrices creadas con el vertex shader
 
 		// Se indica el buffer de datos y la estructura de estos utilizando solo el id del VAO
@@ -340,23 +376,109 @@ void applicationLoop() {
 		//glDrawArrays(GL_TRIANGLES, 0, 6); //se comenta esta linea y se sustituye por el siguiente
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);// ESTRUCTURA: tipo de primitiva, #de vertices, tipó de datos, desde donde empieza
 		//segundo cubo
-		model = glm::translate(glm::mat4(1.0), glm::vec3(-2.0, 1.0, -4.0));
+		model = glm::translate(glm::mat4(1.0), glm::vec3(-4.5, 1.0, -4.0));
 		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		//tercer cubo
-		model = glm::translate(glm::mat4(1.0), glm::vec3(-2.0, 0.0, -4.0));
+		model = glm::translate(glm::mat4(1.0), glm::vec3(-4.5, 0.0, -4.0));
 		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		//cuarto cubo
-		model = glm::translate(glm::mat4(1.0), glm::vec3(-2.0, -1.0, -4.0));
+		model = glm::translate(glm::mat4(1.0), glm::vec3(-4.5, -1.0, -4.0));
 		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		//quinto cubo
+		model = glm::translate(glm::mat4(1.0), glm::vec3(-4.0, -2.0, -4.0));
+		model = glm::scale(model, glm::vec3(2.0, 1.0, 1.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//sexto cubo
+		model = glm::translate(glm::mat4(1.0), glm::vec3(-1.5, 1.0, -4.0));
+		model = glm::scale(model, glm::vec3(2.0, 1.0, 1.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//septimo cubo
+		model = glm::translate(glm::mat4(1.0), glm::vec3(-2.0, -0.5, -4.0));
+		model = glm::scale(model, glm::vec3(1.0, 2.0, 1.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//octavo cubo
 		model = glm::translate(glm::mat4(1.0), glm::vec3(-1.0, -2.0, -4.0));
 		model = glm::scale(model, glm::vec3(3.0, 1.0, 1.0));
 		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
+		//noveno cubo
+		model = glm::translate(glm::mat4(1.0), glm::vec3(0.0, -1.0, -4.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//decimo cubo
+		model = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 1.0, -4.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//decimo primero cubo
+		model = glm::translate(glm::mat4(1.0), glm::vec3(2.5, 1.0, -4.0));
+		model = glm::scale(model, glm::vec3(2.0, 1.0, 1.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//decimo segundo cubo
+		model = glm::translate(glm::mat4(1.0), glm::vec3(1.5, 0.0, -4.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//decimo tercero cubo
+		model = glm::translate(glm::mat4(1.0), glm::vec3(3.5, -0.5, -4.0));
+		model = glm::scale(model, glm::vec3(1.0, 2.0, 1.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//decimo cuarto cubo
+		model = glm::translate(glm::mat4(1.0), glm::vec3(2.5, -2.0, -4.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//decimo quinto cubo
+		model = glm::translate(glm::mat4(1.0), glm::vec3(3.0, -3.0, -4.0));
+		model = glm::scale(model, glm::vec3(3.0, 1.0, 1.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//decimo sexto cubo--
+		model = glm::translate(glm::mat4(1.0), glm::vec3(6.0, 1.0, -4.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//decimo septimo cubo
+		model = glm::translate(glm::mat4(1.0), glm::vec3(5.0, -0.5, -4.0));
+		model = glm::scale(model, glm::vec3(1.0, 2.0, 1.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//decimo octavo cubo
+		model = glm::translate(glm::mat4(1.0), glm::vec3(6.0, -2.0, -4.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//decimo septimo cubo
+		model = glm::translate(glm::mat4(1.0), glm::vec3(7.0, -0.5, -4.0));
+		model = glm::scale(model, glm::vec3(1.0, 2.0, 1.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//decimo octavo cubo
+		model = glm::translate(glm::mat4(1.0), glm::vec3(8.5, -0.5, -4.0));
+		model = glm::scale(model, glm::vec3(1.0, 4.0, 1.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//decimo noveno cubo
+		model = glm::translate(glm::mat4(1.0), glm::vec3(11.0, 1.0, -4.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//cubo 20
+		model = glm::translate(glm::mat4(1.0), glm::vec3(10.0, 0.0, -4.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//cubo 20
+		model = glm::translate(glm::mat4(1.0), glm::vec3(11.0, -1.0, -4.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//cubo 21
+		model = glm::translate(glm::mat4(1.0), glm::vec3(12.0, -0.5, -4.0));
+		model = glm::scale(model, glm::vec3(1.0, 4.0, 1.0));
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		
 		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);
