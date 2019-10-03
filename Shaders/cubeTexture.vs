@@ -5,11 +5,11 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
-out vec3 coordTexture;
+out vec3 our_uv;
 
 void main()
 {
-	coordTexture = in_position;
+	our_uv = in_position;
 	vec4 position = projection * view * model * vec4(in_position, 1.0);
 	gl_Position = position.xyww;
 }
