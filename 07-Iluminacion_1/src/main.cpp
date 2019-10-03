@@ -41,6 +41,7 @@ Shader shader;
 Shader shaderTexture;
 // Descomentar El shader para iluminacion
 Shader shaderColorLighting;//SE DESCOMENTA ESTA LINEA PARA ILUMINACION
+Shader shaderTextureLighting;//se crea el shader de iluminacion de texturas
 
 std::shared_ptr<FirstPersonCamera> camera(new FirstPersonCamera());
 
@@ -136,6 +137,9 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	shaderColorLighting.initialize("../Shaders/iluminacion_color.vs",
 			"../Shaders/iluminacion_color.fs");//SE DESCOMENTE ESTA LINEA
 
+	//se enlace los codigos de los shader de iluminacion de texturas
+	shaderTextureLighting.initialize("../Shaders/iluminacion_texture_res.vs","../Shaders/iluminacion_texture_res.fs");
+
 	// Inicializar los buffers VAO, VBO, EBO
 	sphere1.init();
 	// Método setter que colocar el apuntador al shader
@@ -167,8 +171,8 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	box1.init();
 	// Settea el shader a utilizar
-	box1.setShader(&shaderTexture);
-	box1.setColor(glm::vec4(1.0, 1.0, 0.0, 1.0));
+	box1.setShader(&shaderTextureLighting);//se le asigno el shader de iluminacion a texturas
+	//box1.setColor(glm::vec4(1.0, 1.0, 0.0, 1.0));
 
 	box2.init();
 	box2.setShader(&shaderTexture);
@@ -456,10 +460,20 @@ void applicationLoop() {
 		glm::mat4 lightModelmatrix = glm::rotate(glm::mat4(1.0f), angle, glm::vec3(1.0f, 0.0f, 0.0f));
 		lightModelmatrix = glm::translate(lightModelmatrix, glm::vec3(0.0f, 0.0f, -ratio));
 		shaderColorLighting.setVectorFloat3("light.position",
-				glm::value_ptr(
-						glm::vec4(
-								lightModelmatrix
-										* glm::vec4(0.0, 0.0, 0.0, 1.0))));
+			glm::value_ptr(
+				glm::vec4(
+					lightModelmatrix
+					* glm::vec4(0.0, 0.0, 0.0, 1.0))));
+
+		//le configuramos la componetes de iluminacion al shader de textura
+		shaderTextureLighting.setMatrix4("projection", 1, false, glm::value_ptr(projection));
+		shaderTextureLighting.setMatrix4("view", 1, false, glm::value_ptr(view));
+		shaderTextureLighting.setVectorFloat3("viewPos", glm::value_ptr(camera->getPosition()));
+		shaderTextureLighting.setVectorFloat3("light.ambient", glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
+		shaderTextureLighting.setVectorFloat3("light.diffuse", glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
+		shaderTextureLighting.setVectorFloat3("light.specular", glm::value_ptr(glm::vec3(0.9, 0.9, 0.9)));
+		shaderTextureLighting.setVectorFloat3("light.position", glm::value_ptr( glm::vec4( lightModelmatrix * glm::vec4(0.0, 0.0, 0.0, 1.0))));
+		
 		sphereLamp.render(lightModelmatrix);
 
 		model = glm::translate(model, glm::vec3(0, 0, dz));
@@ -556,9 +570,11 @@ void applicationLoop() {
 		if (angle > 2 * M_PI)
 			angle = 0.0;
 		else
-			angle += 0.0001;
+			angle += 0.0009;
 
 		shader.turnOff();
+		shaderColorLighting.turnOff();
+		shaderTextureLighting.turnOff();
 
 		dz = 0;
 		rot0 = 0;
