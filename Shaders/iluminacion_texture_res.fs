@@ -19,17 +19,20 @@ uniform sampler2D texture1;
 
 void main(){
 	
-	vec3 ambient = light.ambient * vec3(texture(texture1, our_uv));
+	vec4 colorTex = texture(texture1, our_uv);
+	if(colorTex.a < 0.1)
+		discard;
+	vec3 ambient = light.ambient * vec3(colorTex);
 
 	vec3 normal = normalize(our_normal);
 	vec3 lightDir = normalize(light.position - fragPos);
 	float diff = max(dot(lightDir, normal), 0.0);
-	vec3 diffuse = diff * light.diffuse * vec3(texture(texture1, our_uv));
+	vec3 diffuse = diff * light.diffuse * vec3(colorTex);
 
 	vec3 r = reflect(-lightDir, normal);
 	vec3 viewDir = normalize(viewPos - fragPos);
 	float spec = pow(max(dot(r, viewDir), 0.0), 32.0);
-	vec3 specular = spec * light.specular * vec3(texture(texture1, our_uv));
+	vec3 specular = spec * light.specular * vec3(colorTex);
 
 	vec3 result = ambient + diffuse + specular;
 
