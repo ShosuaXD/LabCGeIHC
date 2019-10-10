@@ -95,7 +95,9 @@ vec3 calculateSpotLights(){
 		float intensity = clamp((theta - spotLights[i].outerCutOff) / epsilon, 0.0, 1.0);   
 		float distance = length(spotLights[i].position - fragPos);
 		float attenuation = 1.0f / (spotLights[i].constant + spotLights[i].linear * distance + spotLights[i].quadratic * distance * distance);
-		result +=  intensity * attenuation * calculateDirectionalLight(spotLights[i].light, spotLights[i].direction);
+		//esto es para manejar una atenuaccion (objetos lejados se iluminan menos)
+		//result +=  intensity * attenuation * calculateDirectionalLight(spotLights[i].light, spotLights[i].direction);
+		result +=  intensity * calculateDirectionalLight(spotLights[i].light, spotLights[i].direction);
 	}
 	return result;
 }

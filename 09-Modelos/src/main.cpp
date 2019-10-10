@@ -21,6 +21,7 @@
 #include "Headers/Cylinder.h"
 #include "Headers/Box.h"
 #include "Headers/FirstPersonCamera.h"
+#include "Headers\Model.h"
 
 //GLM include
 #define GLM_FORCE_RADIANS
@@ -68,6 +69,9 @@ Box boxMaterials;
 Box box1;
 Box box2;
 Box box3;
+//models complex instances
+Model modelRock;
+Model pika;
 
 GLuint textureID1, textureID2, textureID3, textureID4;
 GLuint skyboxTextureID;
@@ -201,7 +205,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	cylinder1.setColor(glm::vec4(0.3, 0.3, 1.0, 1.0));
 
 	cylinder2.init();
-	cylinder2.setShader(&shaderTextureLighting);
+	cylinder2.setShader(&shaderMulLighting);
 
 	cylinderMaterials.init();
 	cylinderMaterials.setShader(&shaderMaterialLighting);
@@ -217,17 +221,23 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	box1.init();
 	// Settea el shader a utilizar
-	box1.setShader(&shaderTextureLighting);
+	box1.setShader(&shaderMulLighting);
 	box1.setColor(glm::vec4(1.0, 1.0, 0.0, 1.0));
 
 	box2.init();
-	box2.setShader(&shaderTextureLighting);
+	box2.setShader(&shaderMulLighting);
 
 	sphere3.init();
-	sphere3.setShader(&shaderTextureLighting);
+	sphere3.setShader(&shaderMulLighting);
 
 	box3.init();
-	box3.setShader(&shaderTextureLighting);
+	box3.setShader(&shaderMulLighting);
+
+	modelRock.loadModel("../models/railroad/railroad_track.obj");
+	modelRock.setShader(&shaderMulLighting);
+
+	pika.loadModel("../models/Pikachu/Pikachu OBJ.obj");
+	pika.setShader(&shaderMulLighting);
 
 	camera->setPosition(glm::vec3(0.0, 0.0, 4.0));
 
@@ -397,6 +407,8 @@ void destroy() {
 	sphere1.destroy();
 	cylinder1.destroy();
 	box1.destroy();
+	modelRock.destroy();
+	pika.destroy();
 
 	shader.destroy();
 }
@@ -508,7 +520,7 @@ void applicationLoop() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glm::mat4 projection = glm::perspective(glm::radians(45.0f),
-				(float) screenWidth / (float) screenHeight, 0.01f, 100.0f);
+			(float)screenWidth / (float)screenHeight, 0.01f, 100.0f);
 		glm::mat4 view = camera->getViewMatrix();
 
 		// Settea la matriz de vista y projection al shader con solo color
@@ -516,56 +528,56 @@ void applicationLoop() {
 		shader.setMatrix4("view", 1, false, glm::value_ptr(view));
 		// Settea la matriz de vista y projection al shader con solo textura
 		shaderTexture.setMatrix4("projection", 1, false,
-				glm::value_ptr(projection));
+			glm::value_ptr(projection));
 		shaderTexture.setMatrix4("view", 1, false, glm::value_ptr(view));
 
 		// Settea la matriz de vista y projection al shader con iluminacion solo color
 		shaderColorLighting.setMatrix4("projection", 1, false,
-				glm::value_ptr(projection));
+			glm::value_ptr(projection));
 		shaderColorLighting.setMatrix4("view", 1, false, glm::value_ptr(view));
 
 		// Settea la matriz de vista y projection al shader con iluminacion con textura
 		shaderTextureLighting.setMatrix4("projection", 1, false,
-				glm::value_ptr(projection));
+			glm::value_ptr(projection));
 		shaderTextureLighting.setMatrix4("view", 1, false,
-				glm::value_ptr(view));
+			glm::value_ptr(view));
 
 		// Settea la matriz de vista y projection al shader con iluminacion con material
 		shaderMaterialLighting.setMatrix4("projection", 1, false,
-				glm::value_ptr(projection));
+			glm::value_ptr(projection));
 		shaderMaterialLighting.setMatrix4("view", 1, false,
-				 glm::value_ptr(view));
+			glm::value_ptr(view));
 
 		// Settea la matriz de vista y projection al shader con skybox
 		shaderSkybox.setMatrix4("projection", 1, false,
-				glm::value_ptr(projection));
+			glm::value_ptr(projection));
 		shaderSkybox.setMatrix4("view", 1, false,
-				glm::value_ptr(glm::mat4(glm::mat3(view))));
+			glm::value_ptr(glm::mat4(glm::mat3(view))));
 		// Settea la matriz de vista y projection al shader con multiples luces
 		shaderMulLighting.setMatrix4("projection", 1, false,
-					glm::value_ptr(projection));
+			glm::value_ptr(projection));
 		shaderMulLighting.setMatrix4("view", 1, false,
-				glm::value_ptr(glm::mat4(glm::mat3(view))));
+			glm::value_ptr(view));
 
 		// Propiedades de la luz para objetos con color
 		shaderColorLighting.setVectorFloat3("viewPos",
-				glm::value_ptr(camera->getPosition()));
+			glm::value_ptr(camera->getPosition()));
 		shaderColorLighting.setVectorFloat3("light.ambient",
-				glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
+			glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
 		shaderColorLighting.setVectorFloat3("light.diffuse",
-				glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
+			glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
 		shaderColorLighting.setVectorFloat3("light.specular",
-				glm::value_ptr(glm::vec3(0.9, 0.0, 0.0)));
+			glm::value_ptr(glm::vec3(0.9, 0.0, 0.0)));
 
 		// Propiedades de la luz para objetos con textura
 		shaderTextureLighting.setVectorFloat3("viewPos",
-				glm::value_ptr(camera->getPosition()));
+			glm::value_ptr(camera->getPosition()));
 		shaderTextureLighting.setVectorFloat3("light.ambient",
-				glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
+			glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
 		shaderTextureLighting.setVectorFloat3("light.diffuse",
-				glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
+			glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
 		shaderTextureLighting.setVectorFloat3("light.specular",
-				glm::value_ptr(glm::vec3(0.9, 0.0, 0.0)));
+			glm::value_ptr(glm::vec3(0.9, 0.0, 0.0)));
 
 		// Propiedades de la luz para objetos con textura
 		shaderMaterialLighting.setVectorFloat3("viewPos", glm::value_ptr(camera->getPosition()));
@@ -579,6 +591,19 @@ void applicationLoop() {
 		shaderMulLighting.setVectorFloat3("directionalLight.light.diffuse", glm::value_ptr(glm::vec3(0.5, 0.5, 0.5)));
 		shaderMulLighting.setVectorFloat3("directionalLight.light.specular", glm::value_ptr(glm::vec3(0.9, 0.9, 0.9)));
 		shaderMulLighting.setVectorFloat3("directionalLight.direction", glm::value_ptr(glm::vec3(0.0, 0.0, -1.0)));
+
+		//esto es para la luz spotlight
+		shaderMulLighting.setInt("spotLightCount", 1);
+		shaderMulLighting.setVectorFloat3("spotLights[0].position", glm::value_ptr(camera->getPosition()));
+		shaderMulLighting.setVectorFloat3("spotLights[0].direction", glm::value_ptr(camera->getFront()));
+		shaderMulLighting.setVectorFloat3("spotLights[0].light.ambient", glm::value_ptr(glm::vec3(0.1,0.1,0.1)));
+		shaderMulLighting.setVectorFloat3("spotLights[0].light.diffuse", glm::value_ptr(glm::vec3(0.4, 0.4, 0.4)));
+		shaderMulLighting.setVectorFloat3("spotLights[0].light.specular", glm::value_ptr(glm::vec3(0.6, 0.6, 0.6)));
+		shaderMulLighting.setFloat("spotLights[0].cutOff", cos(glm::radians(12.5)));
+		shaderMulLighting.setFloat("spotLights[0].outerCutOff", cos(glm::radians(15.0)));
+		shaderMulLighting.setFloat("spotLights[0].constant",1.0);
+		shaderMulLighting.setFloat("spotLights[0].linear", 0.1);
+		shaderMulLighting.setFloat("spotLights[0].quadratic", 0.05);
 
 		glm::mat4 lightModelmatrix = glm::rotate(glm::mat4(1.0f), angle,
 				glm::vec3(1.0f, 0.0f, 0.0f));
@@ -655,7 +680,9 @@ void applicationLoop() {
 		modelAgua = glm::scale(modelAgua, glm::vec3(5.0, 0.01, 5.0));
 		// Se activa la textura del agua
 		glBindTexture(GL_TEXTURE_2D, textureID2);
-		shaderTexture.setFloat("offsetX", offX);
+		//
+		shaderMulLighting.setFloat("offset", offX);
+		//shaderTexture.setFloat("offsetX", offX);
 		box2.render(modelAgua);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		shaderTexture.setFloat("offsetX", 0);
@@ -714,6 +741,16 @@ void applicationLoop() {
 		shaderMaterialLighting.setVectorFloat3("material.specular", glm::value_ptr(glm::vec3(0.727811f, 0.626959f, 0.626959f)));
 		shaderMaterialLighting.setFloat("material.shininess", 76.8f);
 		boxMaterials.render(boxMaterialModel);
+
+		//models complex render
+		glm::mat4 matrixModelRock = glm::mat4(1.0);
+		matrixModelRock = glm::translate(matrixModelRock, glm::vec3(-3.0, 0.0, 4.0));
+		modelRock.render(matrixModelRock);
+		//forze
+		glm::mat4 rata = glm::mat4(1.0);
+		rata = glm::translate(rata, glm::vec3(3.0, 0.0, 4.0));
+		pika.render(rata);
+		glActiveTexture(GL_TEXTURE0);
 
 
 		if (angle > 2 * M_PI)
