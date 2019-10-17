@@ -70,8 +70,14 @@ Box boxMaterial;//se agrego esta linea
 Box box1;
 Box box2;
 Box box3;
+//Figuras para modelar la casa
+Box casaPiso, casaPared;
+//----------------------------
 
 GLuint textureID1, textureID2, textureID3, textureID4;
+//Texturas para el modelo de la casa
+GLuint pisoTexture, paredCementoTexture, paredLadrillosTexture;
+//-----------------------------------------
 // Descomentar
 GLuint skyboxTextureID;
 
@@ -235,6 +241,13 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	box3.init();
 	box3.setShader(&shaderTextureLighting);//se cambio de parametro
+	//-----------inicializacion de los objetos paa modelar la casa-------------------------
+	casaPiso.init();
+	casaPiso.setShader(&shaderTextureLighting);
+
+	casaPared.init();
+	casaPared.setShader(&shaderTextureLighting);
+	//---------------------------------------------------------------------------------
 
 	camera->setPosition(glm::vec3(0.0, 0.0, 4.0));
 
@@ -368,6 +381,62 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	// Libera la memoria de la textura
 	texture4.freeImage(bitmap);
 
+	//-----------------Inicializando las texturas de la casa-------------------------------------//
+	Texture texture5("../Textures/paredLadrillosRojo.jpg");
+	bitmap = texture5.loadImage(true);
+	data = texture5.convertToData(bitmap, imageWidth, imageHeight);
+	glGenTextures(1, &paredLadrillosTexture);
+	glBindTexture(GL_TEXTURE_2D, paredLadrillosTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0,
+			GL_BGRA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+		std::cout << "Failed to load texture" << std::endl;
+	texture5.freeImage(bitmap);
+
+	Texture texture6("../Textures/paredCasa.jpg");
+	bitmap = texture6.loadImage(true);
+	data = texture6.convertToData(bitmap, imageWidth, imageHeight);
+	glGenTextures(1, &paredCementoTexture);
+	glBindTexture(GL_TEXTURE_2D, paredCementoTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0,
+			GL_BGRA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+		std::cout << "Failed to load texture" << std::endl;
+	texture6.freeImage(bitmap);
+
+	Texture texture7("../Textures/pisoRojo.jpg");
+	bitmap = texture7.loadImage(true);
+	data = texture7.convertToData(bitmap, imageWidth, imageHeight);
+	glGenTextures(1, &pisoTexture);
+	glBindTexture(GL_TEXTURE_2D, pisoTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0,
+			GL_BGRA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+		std::cout << "Failed to load texture" << std::endl;
+	texture7.freeImage(bitmap);
+	//--------------------------------------------------------------------------------------------
+
 	// Descomentar
 	// Carga de texturas para el skybox
 	Texture skyboxTexture = Texture("");//se descomenta este pedazo de codigo
@@ -406,6 +475,11 @@ void destroy() {
 	cylinder1.destroy();
 	box1.destroy();
 	boxMaterial.destroy();
+
+	//*****destruccion de los objetos de la casa----------------------
+	casaPared.destroy();
+	casaPiso.destroy();
+	//----------------------------------------------------------------
 
 	shader.destroy();
 }
@@ -593,6 +667,7 @@ void applicationLoop() {
 		shaderMulLighting.setVectorFloat3("directionalLight.light.specular", glm::value_ptr(glm::vec3(0.9, 0.9, 0.9)));
 		shaderMulLighting.setVectorFloat3("directionalLight.direction", glm::value_ptr(glm::vec3(0.0, 0.0, -1.0)));
 
+
 		glm::mat4 lightModelmatrix = glm::rotate(glm::mat4(1.0f), angle,
 				glm::vec3(1.0f, 0.0f, 0.0f));
 		lightModelmatrix = glm::translate(lightModelmatrix,
@@ -676,6 +751,29 @@ void applicationLoop() {
 		glBindTexture(GL_TEXTURE_2D, 0);
 		shaderTexture.setFloat("offsetX", 0);
 
+		//----------Modelo de la casa
+		glm::mat4 casaModeloPiso1 = glm::mat4(1.0);
+		casaModeloPiso1 = glm::translate(casaModeloPiso1, glm::vec3(-7.0, 0.0, -3.0));
+		casaModeloPiso1 = glm::scale(casaModeloPiso1, glm::vec3(5.0, 0.01, 10.0));
+		glBindTexture(GL_TEXTURE_2D, pisoTexture);
+		casaPiso.render(casaModeloPiso1);
+		glBindTexture(GL_TEXTURE_2D, 0);
+
+		glm::mat4 casaModeloPiso2 = glm::translate(casaModeloPiso1, glm::vec3(-0.75, 0.0, -0.75));
+		casaModeloPiso2 = glm::rotate(casaModeloPiso2, glm::radians(90.0f), glm::vec3(0, 1.0, 0));
+		casaModeloPiso2 = glm::scale(casaModeloPiso2, glm::vec3(0.6, 0.01, 2.5));
+		glBindTexture(GL_TEXTURE_2D, pisoTexture);
+		casaPiso.render(casaModeloPiso2);
+		glBindTexture(GL_TEXTURE_2D, 0);
+
+		glm::mat4 casaModeloPared1 = glm::mat4(1.0);
+		casaModeloPared1 = glm::translate(casaModeloPared1, glm::vec3(-4.5, 1.5, -5.75));
+		casaModeloPared1 = glm::scale(casaModeloPared1, glm::vec3(0.01, 3.0, 15.5));
+		glBindTexture(GL_TEXTURE_2D, paredCementoTexture);
+		casaPared.render(casaModeloPared1);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		//-------------------------------------------------
+
 		glm::mat4 modelSphere = glm::mat4(1.0);
 		modelSphere = glm::translate(modelSphere, glm::vec3(3.0, 0.0, 0.0));
 		glBindTexture(GL_TEXTURE_2D, textureID3);
@@ -731,6 +829,8 @@ void applicationLoop() {
 		shaderMaterialLighting.setVectorFloat3("material.specular", glm::value_ptr(glm::vec3(0.296648f, 0.296648f, 0.296648f)));
 		shaderMaterialLighting.setFloat("material.shininess", 11.264f);//se crea otro material
 		boxMaterial.render(boxMaterialModel);
+
+		glActiveTexture(GL_TEXTURE0);
 
 		if (angle > 2 * M_PI)
 			angle = 0.0;
