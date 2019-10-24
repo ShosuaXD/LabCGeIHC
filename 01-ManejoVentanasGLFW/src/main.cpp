@@ -22,6 +22,9 @@ int lastMousePosY;
 
 double deltaTime;
 
+//variable creada para poder manipularla los colores de la ventana
+int color = 1;
+
 // Se definen todos las funciones.
 void reshapeCallback(GLFWwindow* Window, int widthRes, int heightRes);
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
@@ -99,6 +102,16 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 		case GLFW_KEY_ESCAPE:
 			exitApp = true;
 			break;
+		//agregando nuevas teclas para el control de los colores
+		case GLFW_KEY_R://COLOR VERDE
+			color = 1;
+			break;
+		case GLFW_KEY_L://COLOR ROJO
+			color = 2;
+			break;
+		case GLFW_KEY_U://COLOR MORADO
+			color = 3;
+			break;
 		}
 	}
 }
@@ -139,6 +152,17 @@ void applicationLoop() {
 	while (psi) {
 		psi = processInput(true);
 		glClear(GL_COLOR_BUFFER_BIT);
+		//SECCION DEL CODIGO DONDE SE CAMBIARA EL COLOR
+		if (color == 1) {
+			glClearColor(0.0, 0.5, 0.0, 1.0);//color verde
+		}
+		else if (color == 2){
+			glClearColor(1.0, 0.0, 0.0, 1.0);//color rojo
+		}
+		else if (color == 3) {
+			glClearColor(0.5, 0.0, 0.5, 1.0);//color morado
+		}
+
 		glfwSwapBuffers(window);
 	}
 }

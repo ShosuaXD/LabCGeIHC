@@ -1,0 +1,5 @@
+﻿  main.cpp
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\03-sistemascoordenados\src\main.cpp(282): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\03-sistemascoordenados\src\main.cpp(283): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+  03-SistemasCoordenados.vcxproj -> C:\Users\CGI05\Documents\Visual Studio 2017\Projects\CGeIHC\LabCGeIHC\Debug\03-SistemasCoordenados.exe
+  03-SistemasCoordenados.vcxproj -> C:\Users\CGI05\Documents\Visual Studio 2017\Projects\CGeIHC\LabCGeIHC\Debug\03-SistemasCoordenados.pdb (Partial PDB)
