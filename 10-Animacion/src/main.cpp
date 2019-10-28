@@ -73,12 +73,29 @@ Box box2;
 Box box3;
 Box boxCesped;
 Box boxWall;
+//------------Declaracion de los elementos de la pratica 10-----------
+Box carretera;
+GLuint highWayTexture;
+Model carro;
+Model helicoptero;
+Model silla;
+//-----------------------
+
+//Figuras para modelar la casa
+Box casaPiso, casaPared;
+//----------------------------
+
 // Models complex instances
 Model modelRock;
 Model modelRailRoad;
 Model modelAircraft;
 
 GLuint textureID1, textureID2, textureID3, textureID4, textureID5;
+
+//Texturas para el modelo de la casa----------------------------
+GLuint pisoTexture, paredCementoTexture, paredLadrillosTexture;
+//--------------------------------------------------------------
+
 GLuint skyboxTextureID;
 
 GLenum types[6] = {
@@ -244,6 +261,20 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	boxWall.init();
 	boxWall.setShader(&shaderMulLighting);
 
+	//----------Inicializaciones de la practica 10------------------------------
+	carretera.init();
+	carretera.setShader(&shaderMulLighting);
+
+	carro.loadModel("../models/Eclipse/2003eclipse.obj");
+	carro.setShader(&shaderMulLighting);
+
+	helicoptero.loadModel("../models/Helicopter/Mi_24.obj");
+	helicoptero.setShader(&shaderMulLighting);
+
+	silla.loadModel("../models/Office_Chair_v1_L3.123cf4a20c81-89b5-417b-848a-24ea67f9fb6b/10239_Office_Chair_v1_L3.obj");
+	silla.setShader(&shaderMulLighting);
+	//----------------------------------------
+
 	modelRock.loadModel("../models/rock/rock.obj");
 	modelRock.setShader(&shaderMulLighting);
 
@@ -252,6 +283,14 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	modelAircraft.loadModel("../models/Aircraft_obj/E 45 Aircraft_obj.obj");
 	modelAircraft.setShader(&shaderMulLighting);
+
+	//-----------inicializacion de los objetos paa modelar la casa-------------------------
+	casaPiso.init();
+	casaPiso.setShader(&shaderMulLighting);
+
+	casaPared.init();
+	casaPared.setShader(&shaderMulLighting);
+	//---------------------------------------------------------------------------------
 
 	camera->setPosition(glm::vec3(0.0, 3.0, 4.0));
 
@@ -417,6 +456,82 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	// Libera la memoria de la textura
 	texture5.freeImage(bitmap);
 
+	//-----------------Inicializando las texturas de la casa-------------------------------------------------------------------
+	Texture texture6("../Textures/paredLadrillosRojo.jpg");
+	bitmap = texture6.loadImage(true);
+	data = texture6.convertToData(bitmap, imageWidth, imageHeight);
+	glGenTextures(1, &paredLadrillosTexture);
+	glBindTexture(GL_TEXTURE_2D, paredLadrillosTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0,
+			GL_BGRA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+		std::cout << "Failed to load texture" << std::endl;
+	texture6.freeImage(bitmap);
+
+	Texture texture7("../Textures/paredCasa.jpg");
+	bitmap = texture7.loadImage(true);
+	data = texture7.convertToData(bitmap, imageWidth, imageHeight);
+	glGenTextures(1, &paredCementoTexture);
+	glBindTexture(GL_TEXTURE_2D, paredCementoTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0,
+			GL_BGRA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+		std::cout << "Failed to load texture" << std::endl;
+	texture7.freeImage(bitmap);
+
+	Texture texture8("../Textures/pisoRojo.jpg");
+	bitmap = texture8.loadImage(true);
+	data = texture8.convertToData(bitmap, imageWidth, imageHeight);
+	glGenTextures(1, &pisoTexture);
+	glBindTexture(GL_TEXTURE_2D, pisoTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0,
+			GL_BGRA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+		std::cout << "Failed to load texture" << std::endl;
+	texture8.freeImage(bitmap);
+	//-------------------------------------------------------------------------------------------------------------------------
+
+	//--------Texturas de la practica 10------------------------------
+	Texture texture9("../Textures/highWayTexture.jpg");
+	bitmap = texture9.loadImage(true);
+	data = texture9.convertToData(bitmap, imageWidth, imageHeight);
+	glGenTextures(1, &highWayTexture);
+	glBindTexture(GL_TEXTURE_2D, highWayTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0,
+			GL_BGRA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+		std::cout << "Failed to load texture" << std::endl;
+	texture9.freeImage(bitmap);
+	//--------------------------------
+
 	// Carga de texturas para el skybox
 	Texture skyboxTexture = Texture("");
 	glGenTextures(1, &skyboxTextureID);
@@ -451,10 +566,35 @@ void destroy() {
 
 	// Destrucción de los VAO, EBO, VBO
 	sphere1.destroy();
+	sphere2.destroy();
+	sphere3.destroy();
+	sphereLamp.destroy();
+	skyboxSphere.destroy();
 	cylinder1.destroy();
+	cylinder2.destroy();
+	cylinderMaterials.destroy();
+	boxMaterials.destroy();
 	box1.destroy();
+	box2.destroy();
+	box3.destroy();
+	boxWall.destroy();
+
+	//objetos de la casa
+	casaPared.destroy();
+	casaPiso.destroy();
+	//------------------
+
+	//destruccion de los objetos de la practica 10
+	carretera.destroy();
+	//------------------------------
 
 	shader.destroy();
+	shaderColorLighting.destroy();
+	shaderMaterialLighting.destroy();
+	shaderMulLighting.destroy();
+	shaderSkybox.destroy();
+	shaderTexture.destroy();
+	shaderTextureLighting.destroy();
 }
 
 void reshapeCallback(GLFWwindow *Window, int widthRes, int heightRes) {
@@ -571,6 +711,25 @@ void applicationLoop() {
 	//se cambiaron de posicion estas variables
 	glm::mat4 matrixModelAircraft = glm::mat4(1.0);
 	matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(8.0, 2.0, -10.0));
+
+	//----------posicion original de los modelos de la practica 10
+	glm::mat4 matrizCarro = glm::mat4(1.0);
+	matrizCarro = glm::translate(matrizCarro, glm::vec3(22.5, 0.09, -12.5));
+	int estadoCarro = 0;
+	float avanceCarro = 0.0;
+	float rotacionCarro = 0.0;
+
+	glm::mat4 matrizHelicoptero = glm::mat4(1.0);
+	matrizHelicoptero = glm::translate(matrizHelicoptero, glm::vec3(-10.0, 5, -5.0));
+	int estadoHelicoptero = 1;
+	float aterrizajeHelicoptero = 0.0;
+	float elevacionHelicoptero = 0.0;
+	float avanceHelicoptero = 0.0;
+
+	int duracionLuces = 0;
+	bool cambioLuces = true;
+	//----------------------------------------------------------------------
+
 	int state = 0;
 	float offsetAircraftAdvance = 0.0;
 	float offsetAircraftRot = 0.0;
@@ -667,6 +826,7 @@ void applicationLoop() {
 		// Esto es para la luces pointlights
 		// Numero de luces a utilizar de tipo pointLight = 3
 		shaderMulLighting.setInt("pointLightCount", 4);//se cambio el valor del parametro; antes 3
+
 		// Posicion de la luz con indice [0]
 		shaderMulLighting.setVectorFloat3("pointLights[0].position", glm::value_ptr((glm::vec3(-5.1, 4.5, -3.5))));
 		//Propiedades de la luz verde
@@ -676,7 +836,6 @@ void applicationLoop() {
 		shaderMulLighting.setFloat("pointLights[0].constant", 1.0);
 		shaderMulLighting.setFloat("pointLights[0].linear", 0.04);
 		shaderMulLighting.setFloat("pointLights[0].quadratic", 0.004);
-
 		// Se realiza lo mismo para la luz roja
 		shaderMulLighting.setVectorFloat3("pointLights[1].position", glm::value_ptr((glm::vec3(-5.1, 4.8, -5.0))));
 		shaderMulLighting.setVectorFloat3("pointLights[1].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
@@ -685,7 +844,6 @@ void applicationLoop() {
 		shaderMulLighting.setFloat("pointLights[1].constant", 1.0);
 		shaderMulLighting.setFloat("pointLights[1].linear", 0.04);
 		shaderMulLighting.setFloat("pointLights[1].quadratic", 0.004);
-
 		//Se coloca una luz azul
 		shaderMulLighting.setVectorFloat3("pointLights[2].position", glm::value_ptr((glm::vec3(-5.1, 4.5, -6.5))));
 		shaderMulLighting.setVectorFloat3("pointLights[2].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
@@ -694,7 +852,6 @@ void applicationLoop() {
 		shaderMulLighting.setFloat("pointLights[2].constant", 1.0);
 		shaderMulLighting.setFloat("pointLights[2].linear", 0.04);
 		shaderMulLighting.setFloat("pointLights[2].quadratic", 0.004);
-
 		//se agrego esta linea 
 		shaderMulLighting.setVectorFloat3("pointLights[3].position", glm::value_ptr((glm::vec3(-14.9, 4.8, -5.0))));//se cambia de posicion
 		shaderMulLighting.setVectorFloat3("pointLights[3].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
@@ -703,7 +860,6 @@ void applicationLoop() {
 		shaderMulLighting.setFloat("pointLights[3].constant", 1.0);
 		shaderMulLighting.setFloat("pointLights[3].linear", 0.04);
 		shaderMulLighting.setFloat("pointLights[3].quadratic", 0.004);
-
 		//Se coloca otra luz de color morado
 		shaderMulLighting.setVectorFloat3("pointLights[4].position", glm::value_ptr((glm::vec3(-14.9, 3.8, -5.0))));
 		shaderMulLighting.setVectorFloat3("pointLights[4].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
@@ -712,34 +868,41 @@ void applicationLoop() {
 		shaderMulLighting.setFloat("pointLights[4].constant", 1.0);
 		shaderMulLighting.setFloat("pointLights[4].linear", 0.04);
 		shaderMulLighting.setFloat("pointLights[4].quadratic", 0.004);
-
+		
+		//---------------luces navideñas--------------------------------------------------------------------------------------
 		// Esto es para colocar las esferas de las luces
-		sphereLamp.setScale(glm::vec3(0.1, 0.1, 0.2));
-		sphereLamp.setPosition(glm::vec3(-5.1, 4.5, -3.5));
-		sphereLamp.setColor(glm::vec4(0.0, 1.0, 0.0, 1.0));
-		sphereLamp.render();
+		if (cambioLuces) {
+			duracionLuces += 1;
+			sphereLamp.setScale(glm::vec3(0.1, 0.1, 0.2));
+			sphereLamp.setPosition(glm::vec3(-5.1, 4.5, -3.5));
+			sphereLamp.setColor(glm::vec4(0.0, 1.0, 0.0, 1.0));
+			sphereLamp.render();
 
-		sphereLamp.setScale(glm::vec3(0.1, 0.1, 0.2));
-		sphereLamp.setPosition(glm::vec3(-5.1, 4.8, -5.0));
-		sphereLamp.setColor(glm::vec4(1.0, 0.0, 0.0, 1.0));
-		sphereLamp.render();
+			sphereLamp.setScale(glm::vec3(0.1, 0.1, 0.2));
+			sphereLamp.setPosition(glm::vec3(-5.1, 4.5, -6.5));
+			sphereLamp.setColor(glm::vec4(0.0, 0.0, 1.0, 1.0));
+			sphereLamp.render();
+		}
+		else {
+			duracionLuces -= 1;
+			sphereLamp.setScale(glm::vec3(0.1, 0.1, 0.2));
+			sphereLamp.setPosition(glm::vec3(-5.1, 4.8, -5.0));
+			sphereLamp.setColor(glm::vec4(1.0, 0.0, 0.0, 1.0));
+			sphereLamp.render();
 
-		sphereLamp.setScale(glm::vec3(0.1, 0.1, 0.2));
-		sphereLamp.setPosition(glm::vec3(-5.1, 4.5, -6.5));
-		sphereLamp.setColor(glm::vec4(0.0, 0.0, 1.0, 1.0));
-		sphereLamp.render();
+			//se coloco una referencia a la nueva luz amarilla
+			sphereLamp.setScale(glm::vec3(0.1, 0.1, 0.2));
+			sphereLamp.setPosition(glm::vec3(-14.9, 4.8, -5.0));
+			sphereLamp.setColor(glm::vec4(0.6, 0.6, 0.0, 1.0));
+			sphereLamp.render();
 
-		//se coloco una referencia a la nueva luz amarilla
-		sphereLamp.setScale(glm::vec3(0.1, 0.1, 0.2));
-		sphereLamp.setPosition(glm::vec3(-14.9, 4.8, -5.0));
-		sphereLamp.setColor(glm::vec4(0.6, 0.6, 0.0, 1.0));
-		sphereLamp.render();
-
-		//se coloco una referencia a la nueva luz morada
-		sphereLamp.setScale(glm::vec3(0.1, 0.1, 0.2));
-		sphereLamp.setPosition(glm::vec3(-14.9, 3.8, -5.0));
-		sphereLamp.setColor(glm::vec4(0.34, 0.14, 0.0, 0.39));
-		sphereLamp.render();
+			//se coloco una referencia a la nueva luz morada
+			sphereLamp.setScale(glm::vec3(0.1, 0.1, 0.2));
+			sphereLamp.setPosition(glm::vec3(-14.9, 3.8, -5.0));
+			sphereLamp.setColor(glm::vec4(0.34, 0.14, 0.0, 0.39));
+			sphereLamp.render();
+		}
+		//--------------------------------------------------------------------------------------------------------------------
 
 		glm::mat4 lightModelmatrix = glm::rotate(glm::mat4(1.0f), angle,
 				glm::vec3(1.0f, 0.0f, 0.0f));
@@ -929,6 +1092,63 @@ void applicationLoop() {
 		boxWall.render();
 		glBindTexture(GL_TEXTURE_2D, 0);
 
+		//----------Modelo de la casa------------------------------------------------------------------------------------------
+		glm::mat4 casaModeloPiso1 = glm::mat4(1.0);
+		casaModeloPiso1 = glm::translate(casaModeloPiso1, glm::vec3(0.0, 6.0, -1.0));
+		casaModeloPiso1 = glm::scale(casaModeloPiso1, glm::vec3(2.0, 0.01, 1.0));
+		glBindTexture(GL_TEXTURE_2D, pisoTexture);
+		casaPiso.render(casaModeloPiso1);
+		glBindTexture(GL_TEXTURE_2D, 0);
+
+		glm::mat4 casaModeloPiso2 = glm::mat4(1.0);
+		casaModeloPiso2 = glm::translate(casaModeloPiso2, glm::vec3(1.0, 6.0, 0.0));
+		//casaModeloPiso2 = glm::rotate(casaModeloPiso2, glm::radians(90.0f), glm::vec3(0, 1.0, 0));
+		casaModeloPiso2 = glm::scale(casaModeloPiso2, glm::vec3(1.0, 0.01, 1.0));
+		glBindTexture(GL_TEXTURE_2D, pisoTexture);
+		casaPiso.render(casaModeloPiso2);
+		glBindTexture(GL_TEXTURE_2D, 0);
+
+		/*glm::mat4 casaModeloPared1 = glm::mat4(casaModeloPiso1);
+		casaModeloPared1 = glm::translate(casaModeloPared1, glm::vec3(-4.5, 1.5, -5.75));
+		casaModeloPared1 = glm::scale(casaModeloPared1, glm::vec3(1.0, 1.0, 1.0));
+		glBindTexture(GL_TEXTURE_2D, paredCementoTexture);
+		casaPared.render(casaModeloPared1);
+		glBindTexture(GL_TEXTURE_2D, 0);*/
+		//---------------------------------------------------------------------------------------------------------------------
+
+		//-------render de los elementos de la practica 10---------------------------------------------------------------------
+		carro.render(glm::scale(matrizCarro, glm::vec3(1.0, 1.0, 1.0)));
+		glActiveTexture(GL_TEXTURE0);
+
+		helicoptero.render(glm::scale(matrizHelicoptero, glm::vec3(1.0, 1.0, 1.0)));
+		glActiveTexture(GL_TEXTURE0);
+
+		glm::mat4 matrizSilla = glm::mat4(1.0);
+		matrizSilla = glm::translate(matrizSilla, glm::vec3(-12.5, 0.0, -7.5));
+		matrizSilla = glm::rotate(matrizSilla, glm::radians(-90.0f), glm::vec3(1, 0, 0));
+		silla.render(glm::scale(matrizSilla, glm::vec3(0.02, 0.02, 0.02)));
+
+		glm::mat4 camino1 = glm::mat4(1.0);
+		camino1 = glm::translate(camino1, glm::vec3(0.0, 0.09, -25.0));
+		glBindTexture(GL_TEXTURE_2D, highWayTexture);
+		carretera.render(glm::scale(camino1, glm::vec3(37.0, 0.01, 10.0)));
+
+		glm::mat4 camino2 = glm::mat4(1.0);
+		camino2 = glm::translate(camino2, glm::vec3(-23.5, 0.09, -1.5));
+		camino2 = glm::rotate(camino2, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0));
+		carretera.render(glm::scale(camino2, glm::vec3(49.0, 0.01, 10.0)));
+
+		glm::mat4 camino3 = glm::mat4(1.0);
+		camino3 = glm::translate(camino3, glm::vec3(0.0, 0.09, 17.5));
+		carretera.render(glm::scale(camino3, glm::vec3(37.0, 0.01, 10.0)));
+
+		glm::mat4 camino4 = glm::mat4(1.0);
+		camino4 = glm::translate(camino4, glm::vec3(23.5, 0.09, -1.5));
+		camino4 = glm::rotate(camino4, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0));
+		carretera.render(glm::scale(camino4, glm::vec3(49.0, 0.01, 10.0)));
+		glBindTexture(GL_TEXTURE_2D, 0);
+		//---------------------------------------------------------------------------------------------------------------------
+
 		//matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(8.0, 2.0, -10.0));
 		modelAircraft.render(matrixModelAircraft);
 		glActiveTexture(GL_TEXTURE0);
@@ -958,7 +1178,7 @@ void applicationLoop() {
 		switch (state)
 		{
 			case 0:
-				std::cout << "Advance " << std::endl;
+				//std::cout << "Advance " << std::endl;
 				// -0.001 debe ser igual
 				matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(0.0, 0.0, -0.01));
 				//matrixModelAircraft = glm::rotate(matrixModelAircraft, glm::radians(1.0f), glm::vec3(0.0, 1.0, 0.0));
@@ -970,7 +1190,7 @@ void applicationLoop() {
 				}
 				break;
 			case 1:
-				std::cout << "Turn: " << std::endl;
+				//std::cout << "Turn: " << std::endl;
 				matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(0.0, 0.0, -0.01));
 				matrixModelAircraft = glm::rotate(matrixModelAircraft, glm::radians(0.05f), glm::vec3(0.0, 1.0, 0.0));
 				offsetAircraftRot += 0.05;
@@ -982,6 +1202,74 @@ void applicationLoop() {
 			default:
 				break;
 		}
+
+		//------------funcion de la animaciones de la practica 10--------------------------------------------------------------
+		switch (estadoCarro)
+		{
+		case 0:
+			//std::cout << "Advance " << std::endl;
+			// -0.001 debe ser igual
+			matrizCarro = glm::translate(matrizCarro, glm::vec3(0.0, 0.0, 0.01));
+			//matrixModelAircraft = glm::rotate(matrixModelAircraft, glm::radians(1.0f), glm::vec3(0.0, 1.0, 0.0));
+			avanceCarro += 0.05;
+			if (avanceCarro > 93.0) {
+				avanceCarro = 0.0;
+				estadoCarro = 1;
+			}
+			break;
+		case 1:
+			//std::cout << "Turn: " << std::endl;
+			matrizCarro = glm::translate(matrizCarro, glm::vec3(0.0, 0.0, 0.01));
+			matrizCarro = glm::rotate(matrizCarro, glm::radians(-0.05f), glm::vec3(0.0, 1.0, 0.0));
+			rotacionCarro += 0.05;
+			if (rotacionCarro > 90.0) {
+				rotacionCarro = 0.0;
+				estadoCarro = 0;
+			}
+			break;
+		default:
+			break;
+		}
+
+		switch (estadoHelicoptero)
+		{
+		case 0://avance
+			//std::cout << "Advance " << std::endl;
+			// -0.001 debe ser igual
+			matrizHelicoptero = glm::translate(matrizHelicoptero, glm::vec3(0.0, 0.0, 0.01));
+			matrizHelicoptero = glm::rotate(matrizHelicoptero, glm::radians(0.05f), glm::vec3(0.0, 1.0, 0.0));
+			avanceHelicoptero += 0.05;
+			if (avanceHelicoptero > 359.0) {
+				avanceHelicoptero = 0.0;
+				estadoHelicoptero = 2;
+			}
+			break;
+		case 1://elevacion
+			//std::cout << "Turn: " << std::endl;
+			//elevacionHelicoptero = 0.0;
+			matrizHelicoptero = glm::translate(matrizHelicoptero, glm::vec3(0.0, 0.01, 0.0));
+			elevacionHelicoptero += 0.01;
+			if (elevacionHelicoptero > 3.0) {
+				aterrizajeHelicoptero = elevacionHelicoptero;
+				estadoHelicoptero = 0;
+			}
+			break;
+		case 2://aterrizaje
+			matrizHelicoptero = glm::translate(matrizHelicoptero, glm::vec3(0.0, -0.01, 0.0));
+			aterrizajeHelicoptero -= 0.01;
+			if (aterrizajeHelicoptero < 0.0) {
+				elevacionHelicoptero = aterrizajeHelicoptero;
+				estadoHelicoptero = 1;
+			}
+			break;
+		default:
+			break;
+		}
+
+		if (duracionLuces == 20 || duracionLuces == 0) {
+			cambioLuces = !cambioLuces;
+		}
+		//--------------------------------------------------------------
 
 		glfwSwapBuffers(window);
 	}
