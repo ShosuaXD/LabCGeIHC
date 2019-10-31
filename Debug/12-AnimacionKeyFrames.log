@@ -8,69 +8,69 @@ c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animaci
 c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\headers\animationutils.h(75): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\headers\animationutils.h(91): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\headers\animationutils.h(116): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(566): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(567): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(568): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(569): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(601): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(603): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(574): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(575): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(576): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(577): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(604): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
 c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(606): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(608): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(611): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(613): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(610): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(612): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
 c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(616): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
 c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(618): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(621): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(621): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(623): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(623): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(670): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(673): warning C4305: '-=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(676): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(679): warning C4305: '-=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(682): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(685): warning C4305: '-=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(688): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(691): warning C4305: '-=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(694): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(696): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(698): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(700): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(706): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(709): warning C4305: '-=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(713): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(716): warning C4305: '-=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(720): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(723): warning C4305: '-=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(727): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(730): warning C4305: '-=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(734): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(737): warning C4305: '-=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(741): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(744): warning C4305: '-=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(748): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(751): warning C4305: '-=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(754): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(756): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(758): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(760): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(911): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(912): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(915): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(622): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(624): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(628): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(628): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(630): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(630): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(678): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(681): warning C4305: '-=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(684): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(687): warning C4305: '-=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(690): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(693): warning C4305: '-=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(696): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(699): warning C4305: '-=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(702): warning C4305: '=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(704): warning C4305: '=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(706): warning C4305: '=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(708): warning C4305: '=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(714): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(717): warning C4305: '-=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(721): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(724): warning C4305: '-=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(728): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(731): warning C4305: '-=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(735): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(738): warning C4305: '-=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(742): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(745): warning C4305: '-=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(749): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(752): warning C4305: '-=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(756): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(759): warning C4305: '-=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(762): warning C4305: '=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(764): warning C4305: '=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(766): warning C4305: '=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(768): warning C4305: '=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(922): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(923): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
 c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(926): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(927): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(934): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(935): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(942): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(943): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1292): warning C4018: '>': no coinciden signed/unsigned
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1323): warning C4018: '>': no coinciden signed/unsigned
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1348): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1352): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1366): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1367): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1368): warning C4305: '-=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1380): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1381): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(937): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(938): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(945): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(946): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(953): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(954): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1303): warning C4018: '>': no coinciden signed/unsigned
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1334): warning C4018: '>': no coinciden signed/unsigned
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1359): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1363): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1377): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1378): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1379): warning C4305: '-=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1391): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\cgi05\documents\visual studio 2017\projects\cgeihc\labcgeihc\12-animacionkeyframes\src\main.cpp(1392): warning C4305: '+=': truncamiento de 'double' a 'float'
   12-AnimacionKeyFrames.vcxproj -> C:\Users\CGI05\Documents\Visual Studio 2017\Projects\CGeIHC\LabCGeIHC\Debug\12-AnimacionKeyFrames.exe
   12-AnimacionKeyFrames.vcxproj -> C:\Users\CGI05\Documents\Visual Studio 2017\Projects\CGeIHC\LabCGeIHC\Debug\12-AnimacionKeyFrames.pdb (Partial PDB)

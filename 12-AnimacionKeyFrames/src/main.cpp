@@ -600,33 +600,33 @@ bool processInput(bool continueApplication) {
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-		if (camaraSel = 0)
+		if (camaraSel == 0)
 			camera->moveFrontCamera(true, deltaTime);
-		if (camaraSel = 1)
+		if (camaraSel == 1)
 			camera2->moveFrontCamera(true, deltaTime);
 	}
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-		if (camaraSel = 0)
+		if (camaraSel == 0)
 			camera->moveFrontCamera(false, deltaTime);
-		if (camaraSel = 1)
+		if (camaraSel == 1)
 			camera2->moveFrontCamera(false, deltaTime);
 	}
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-		if (camaraSel = 0)
+		if (camaraSel == 0)
 			camera->moveRightCamera(false, deltaTime);
-		if (camaraSel = 1)
+		if (camaraSel == 1)
 			camera2->moveRightCamera(false, deltaTime);
 	}
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-		if (camaraSel = 0)
+		if (camaraSel == 0)
 			camera->moveRightCamera(true, deltaTime);
-		if (camaraSel = 1)
+		if (camaraSel == 1)
 			camera2->moveRightCamera(true, deltaTime);
 	}
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
-		if (camaraSel = 0)
+		if (camaraSel == 0)
 			camera->mouseMoveCamera(offsetX, offsetY, deltaTime);
-		if (camaraSel = 1)
+		if (camaraSel == 1)
 			camera2->mouseMoveCamera(offsetX, offsetY, deltaTime);
 	}
 	offsetX = 0;
@@ -826,10 +826,10 @@ void applicationLoop() {
 				(float) screenWidth / (float) screenHeight, 0.01f, 100.0f);
 		glm::mat4 view;
 
-		if (camaraSel = 0) {
+		if (camaraSel == 0) {
 			view = camera->getViewMatrix();
 		}
-		if (camaraSel = 1) {
+		if (camaraSel == 1) {
 			view = camera2->getViewMatrix();
 		}
 
