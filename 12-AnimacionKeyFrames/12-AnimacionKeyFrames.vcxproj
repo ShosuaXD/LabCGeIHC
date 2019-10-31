@@ -44,6 +44,21 @@
     <ClInclude Include="src\Headers\Texture.h" />
     <ClInclude Include="src\Headers\TimeManager.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Shaders\colorShader.fs" />
+    <None Include="..\Shaders\colorShader.vs" />
+    <None Include="..\Shaders\cubeTexture.fs" />
+    <None Include="..\Shaders\cubeTexture.vs" />
+    <None Include="..\Shaders\iluminacion_color_res.fs" />
+    <None Include="..\Shaders\iluminacion_color_res.vs" />
+    <None Include="..\Shaders\iluminacion_material.vs" />
+    <None Include="..\Shaders\iluminacion_material_res.fs" />
+    <None Include="..\Shaders\iluminacion_texture_res.fs" />
+    <None Include="..\Shaders\iluminacion_texture_res.vs" />
+    <None Include="..\Shaders\multipleLights.fs" />
+    <None Include="..\Shaders\texturizado_res.fs" />
+    <None Include="..\Shaders\texturizado_res.vs" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{5b48aad4-dc74-4332-bf60-2e95c9b1d9e5}</ProjectGuid>
@@ -96,8 +111,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\..\external\glm;..\..\external\glew\include;..\..\external\glfw\include;..\..\external\FreeImage\include;..\..\external\assimp\include;../../external/OpenAL/include;../../external/freealut/include;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\external\glew\lib\;..\..\external\glfw\lib;..\..\external\FreeImage\lib;..\..\external\assimp\lib;../../external/OpenAL/lib;../../external/freealut/lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\external\glm;..\external\glew\include;..\external\glfw\include;..\external\FreeImage\include;..\external\assimp\include;../external/OpenAL/include;../external/freealut/include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\external\glew\lib\;..\external\glfw\lib;..\external\FreeImage\lib;..\external\assimp\lib;../external/OpenAL/lib;../external/freealut/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

@@ -84,4 +84,45 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Shaders\colorShader.fs">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\Shaders\colorShader.vs">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\Shaders\cubeTexture.fs">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\Shaders\cubeTexture.vs">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\Shaders\iluminacion_color_res.fs">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\Shaders\iluminacion_color_res.vs">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\Shaders\iluminacion_material.vs">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\Shaders\iluminacion_material_res.fs">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\Shaders\iluminacion_texture_res.fs">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\Shaders\iluminacion_texture_res.vs">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\Shaders\multipleLights.fs">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\Shaders\texturizado_res.fs">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\Shaders\texturizado_res.vs">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+  </ItemGroup>
 </Project>
