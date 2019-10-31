@@ -341,7 +341,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	modelDartLegoRightLeg.setShader(&shaderMulLighting);
 
 	camera->setPosition(glm::vec3(0.0, 3.0, 4.0));
-	camera2->setPosition(glm::vec3(2.0, 3.0, 4.0));
+	camera2->setPosition(glm::vec3(0.0, -3.0, -4.0));
 
 	// Descomentar
 	// Definimos el tamanio de la imagen
@@ -558,6 +558,14 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action,
 		case GLFW_KEY_ESCAPE:
 			exitApp = true;
 			break;
+		case GLFW_KEY_K:
+			camaraSel = 1;
+			std::cout << camaraSel<<"\n";
+			break;
+		case GLFW_KEY_L:
+			camaraSel = 0;
+			std::cout << camaraSel<<"\n";
+			break;
 		}
 	}
 }
@@ -591,36 +599,36 @@ bool processInput(bool continueApplication) {
 		return false;
 	}
 
-	if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS)
-		camaraSel = 1;
-	if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
-		camaraSel = 0;
-
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		if(camaraSel = 0)
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+		if (camaraSel = 0)
 			camera->moveFrontCamera(true, deltaTime);
-		if(camaraSel = 1)
+		if (camaraSel = 1)
 			camera2->moveFrontCamera(true, deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	}
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
 		if (camaraSel = 0)
 			camera->moveFrontCamera(false, deltaTime);
 		if (camaraSel = 1)
 			camera2->moveFrontCamera(false, deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		if (camaraSel = 1)
-			camera->moveRightCamera(false, deltaTime);
+	}
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
 		if (camaraSel = 0)
+			camera->moveRightCamera(false, deltaTime);
+		if (camaraSel = 1)
 			camera2->moveRightCamera(false, deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+	}
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
 		if (camaraSel = 0)
 			camera->moveRightCamera(true, deltaTime);
 		if (camaraSel = 1)
 			camera2->moveRightCamera(true, deltaTime);
-	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+	}
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
 		if (camaraSel = 0)
 			camera->mouseMoveCamera(offsetX, offsetY, deltaTime);
 		if (camaraSel = 1)
 			camera2->mouseMoveCamera(offsetX, offsetY, deltaTime);
+	}
 	offsetX = 0;
 	offsetY = 0;
 
@@ -797,7 +805,6 @@ void applicationLoop() {
 	keyFramesDart = getKeyFrames("../animaciones/animation_dart_2.txt");//se cambia con respecto a la linea 613
 
 	lastTime = TimeManager::Instance().GetTime();
-	glm::mat4 view;
 
 	while (psi) {
 		currTime = TimeManager::Instance().GetTime();
@@ -817,10 +824,14 @@ void applicationLoop() {
 
 		glm::mat4 projection = glm::perspective(glm::radians(45.0f),
 				(float) screenWidth / (float) screenHeight, 0.01f, 100.0f);
-		if(camaraSel = 0)
+		glm::mat4 view;
+
+		if (camaraSel = 0) {
 			view = camera->getViewMatrix();
-		if(camaraSel = 1)
+		}
+		if (camaraSel = 1) {
 			view = camera2->getViewMatrix();
+		}
 
 		// Settea la matriz de vista y projection al shader con solo color
 		shader.setMatrix4("projection", 1, false, glm::value_ptr(projection));
